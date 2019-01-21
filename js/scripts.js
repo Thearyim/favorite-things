@@ -1,12 +1,17 @@
-function showFavoriteThings(favoriteThings) {
-  var favoriteThingsList = "";
-  for (i = 0; i < favoriteThings.length; i++) {
-    favoriteThingsList+=favoriteThings[i]+"<ul>";
-  }
+function showFavoriteThings(favoriteThingsArray) {
 
-  $("#result").text(favoriteThingsList);
+  $("#result").text(favoriteThingsArray);
   $("#result").show();
   $("form#favoriteList").hide();
+}
+
+function showAFewFavoriteThings(favoriteThingsArray) {
+  var aFewFavoriteThings = [];
+  aFewFavoriteThings.push(favoriteThingsArray[1]);
+  aFewFavoriteThings.push(favoriteThingsArray[0]);
+  aFewFavoriteThings.push(favoriteThingsArray[2]);
+
+  showFavoriteThings(aFewFavoriteThings);
 }
 
 $(document).ready(function(){
@@ -22,7 +27,21 @@ $(document).ready(function(){
 
     var favoriteThings = [question1, question2, question3, question4, question5, question6, question7, question8];
 
-    showFavoriteThings(favoriteThings);
+    showAFewFavoriteThings(favoriteThings);
+    //showFavoriteThings(favoriteThings);
     event.preventDefault();
   });
+});
+
+function initializeFakeValues() {
+  var fakeValues = [ "sushi", "water", "cat", "pop", "swimming", "friends", "mall", "sleep"];
+  var inputs = $("form#favoriteList input[type=text]");
+
+  for (i = 0; i < fakeValues.length; i++){
+    inputs[i].value = fakeValues[i];
+  }
+}
+
+$(document).ready(function(){
+  initializeFakeValues();
 });
