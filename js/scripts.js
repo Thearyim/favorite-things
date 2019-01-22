@@ -1,17 +1,22 @@
 function showFavoriteThings(favoriteThingsArray) {
+  var htmlListItem = "";
 
-  $("#result").text(favoriteThingsArray);
-  $("#result").show();
+  for (i = 0; i <favoriteThingsArray.length; i++) {
+    htmlListItem = htmlListItem + "<li>" + favoriteThingsArray[i] + "</li>";
+  }
+
+  $("#resultList").html(htmlListItem);
   $("form#favoriteList").hide();
+  $("#result").show();
 }
 
-function showAFewFavoriteThings(favoriteThingsArray) {
+function getAFewFavoriteThings(favoriteThingsArray) {
   var aFewFavoriteThings = [];
   aFewFavoriteThings.push(favoriteThingsArray[1]);
   aFewFavoriteThings.push(favoriteThingsArray[0]);
   aFewFavoriteThings.push(favoriteThingsArray[2]);
 
-  showFavoriteThings(aFewFavoriteThings);
+  return aFewFavoriteThings;
 }
 
 $(document).ready(function(){
@@ -26,9 +31,10 @@ $(document).ready(function(){
     var question8 = $("input:text[name=sick]").val();
 
     var favoriteThings = [question1, question2, question3, question4, question5, question6, question7, question8];
+    var subsetOfFavoriteThings = getAFewFavoriteThings(favoriteThings);
 
-    showAFewFavoriteThings(favoriteThings);
-    //showFavoriteThings(favoriteThings);
+    showFavoriteThings(subsetOfFavoriteThings);
+
     event.preventDefault();
   });
 });
